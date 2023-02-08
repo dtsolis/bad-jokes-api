@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
+    <style>
+      body {
+        font-family: sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      li:last-child {
+        border-bottom: none;
+      }
+      li a {
+        text-decoration: none;
+        color: #8a051d;
+      }
+      li span {
+        color: #8a051d;
+      }
+      li a:hover {
+        text-decoration: underline;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 40px 0;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      table td {
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      table tr:nth-child(odd) {
+        background-color: #f9f9f9;
+      }
+      table tr:nth-child(even) {
+        background-color: #fff;
+      }
+      table tr:first-child {
+        background-color: #8a051d;
+        color: #fff;
+      }
+      input {
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 3px;
+        width: 40px;
+      }
+      button {
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin-left: 12px;
+        border-radius: 3px;
+        background-color: #8a051d;
+        color: #fff;
+        cursor: pointer;
+      }
+      #forkme {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 0;
+      }
+      #joke {
+        background: #ececec;
+        color: #000;
+        padding: 20px;
+        border-radius: 5px;
+      }
+    </style>
+    <script>
+      function viewJoke() {
+          const jokeId = document.getElementById('joke-id').value;
+          window.location.href = `/jokes/${jokeId || ':id'}`;
+      }
+    </script>
+  </head>
+  <body>
+    <a id="forkme" href="https://github.com/dtsolis/bad-jokes-api">
+      <img decoding="async" loading="lazy" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+    </a>
+
+    <h2>Random joke</h2>
+    <p id="joke">
+      <%- joke %>
+    </p>
+    <hr />
+    <h2>Using the API</h2>
+    <ul>
+      <li>GET <a href="/jokes/random">/jokes/random</a></li>
+      <li>GET <span>/jokes/</span><input id="joke-id" placeholder=":id" /><button onclick="viewJoke()">View</button></li>
+      <li>GET <a href="/jokes">/jokes</a></li>
+    </ul>
+
+    <h3>Query parameters</h3>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td>Required</td>
+        <td>Type</td>
+        <td>Options</td>
+        <td>Description</td>
+      </tr>
+      <tr>
+        <td><b>language</b></td>
+        <td>NO</td>
+        <td>string</td>
+        <td><b>en&nbsp;|&nbsp;el</b></td>
+        <td>Gets a random joke in a specific language or filters the jokes list by that language.</td>
+      </tr>
+      <tr>
+        <td><b>format</b></td>
+        <td>NO</td>
+        <td>string</td>
+        <td><b>html&nbsp;|&nbsp;text&nbsp;|&nbsp;json</b></td>
+        <td>When it's value is <b>html</b> will respond with HTML. When it's <b>text</b> will respond with the text as is. In any other case will respond in json.</td>
+      </tr>
+    </table>
+  </body>
+</html>
