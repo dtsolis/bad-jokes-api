@@ -10,7 +10,11 @@ app.use(cors());
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("index", { joke: misc.textToHtml(jokes.getRandomJoke().text) });
+  const joke = jokes.getRandomJoke();
+  res.render("index", {
+    joke: misc.textToHtml(joke.text),
+    jokeId: joke.id,
+  });
 });
 
 app.get("/jokes/random", (req, res) => {
